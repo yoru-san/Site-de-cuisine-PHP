@@ -16,3 +16,8 @@ Route::get('/', function()
 	return View::make('site.index');
 });
 
+Route::get('/listRecipes', 'RecipeController@showRecipe');
+Route::get('/addRecipe', 'RecipeController@addRecipe');
+Route::get('/{id}/update', 'RecipeController@updateRecipe');
+Route::get('/{id}/delete', 'RecipeController@deleteRecipe');
+
