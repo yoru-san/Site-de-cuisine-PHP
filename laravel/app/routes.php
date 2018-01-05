@@ -13,11 +13,14 @@
 
 Route::get('/', function()
 {
-	return View::make('site.index');
+	$recipe = Recipe::all();
+	return View::make('site.index')->with('recipe', $recipe);
 });
 
-Route::get('/listRecipes', 'RecipeController@showRecipe');
-Route::get('/addRecipe', 'RecipeController@addRecipe');
+//Route::get('/listRecipes', 'RecipeController@showRecipe');
+Route::get('/addRecipe', 'RecipeController@showPage');
+Route::post('/addRecipe', 'RecipeController@addRecipe');
+Route::get('/{id}/showRecipe', 'RecipeController@showRecipe');
 Route::get('/{id}/update', 'RecipeController@updateRecipe');
 Route::get('/{id}/delete', 'RecipeController@deleteRecipe');
 

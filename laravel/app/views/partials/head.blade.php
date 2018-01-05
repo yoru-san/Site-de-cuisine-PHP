@@ -21,6 +21,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/plugins/tag-it/bootstrap-tagsinput.css') }}">
+
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+
+<script src="{{ asset('assets/plugins/tag-it/bootstrap-tagsinput.min.js') }}"></script>  
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
