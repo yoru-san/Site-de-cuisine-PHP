@@ -1,8 +1,7 @@
 <?php
 
-class Recipe extends Eloquent {
+class Ingredient extends Eloquent {
 
 
     public $timestamps = false;
-
 }

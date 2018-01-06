@@ -4,8 +4,9 @@ class RecipeController extends BaseController {
 
 
     public function showRecipe($id) {
-        $recipe = Recipe($id);
-        return View::make('site.showRecipe');
+        Recipe::where('id',$id) -> first();
+
+        return View::make('site.showRecipe')->with('recipe', $id);
     }
 
     public function showPage() {
