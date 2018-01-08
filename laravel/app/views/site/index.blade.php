@@ -17,9 +17,9 @@
                 <tr role="row" class="even">
                   <td><a>{{$rec->title}}</a></td>
                   <td>{{$rec->id_category}}</td>
+                  <td><a class="btn btn-primary" href="{{url( $rec->id . '/show')}}">Voir</a></td>                                  
                   <td><a class="btn btn-warning" href="{{url('/' . $rec->id . '/update')}}">Modifier</a></td>
                   <td><a class="btn btn-danger" href="{{url( $rec->id . '/delete')}}">Supprimer</a></td>
-
                   
                 </tr>
                 @endforeach

@@ -9,7 +9,7 @@
   <form method="post" action="#">
     <div class="form-group">
       <label>Nom de la recette</label>
-      <input type="email" class="form-control"  aria-describedby="emailHelp" name="title" placeholder="Nom">
+      <input type="text" class="form-control"  aria-describedby="emailHelp" name="title" placeholder="Nom">
     </div>
     <div class="form-group">
      <label>Description de la recette</label>
@@ -18,11 +18,11 @@
 
   <div class="form-group">
     <label for="sel1">Type de la recette</label>
-    <select class="form-control" id="sel1">
-      <option>Amuse-bouche</option>
-      <option>Entrée</option>
-      <option>Plat principal</option>
-      <option>Dessert</option>
+    <select class="form-control" id="sel1" name="recipe_category">
+      <option value="1">Amuse-bouche</option>
+      <option value="2">Entrée</option>
+      <option value="3">Plat principal</option>
+      <option value="4">Dessert</option>
     </select>
   </div>
 
@@ -37,10 +37,14 @@
   <div class="form-group">
     <label>Liste des ingredients</label><br>
     <input type="text" class="form-control" value="" id="ingredientList"><br>
-    <small id="emailHelp" class="form-text text-muted">Espace pour valider, PAS ENTRER, putain</small>
+    <small id="emailHelp" class="form-text text-muted">Barre espace pour ajouter les ingrédients à votre recette</small>
   </div>
 
   <input type="submit" value="Ajouter">
+
+  @if (isset($existing))
+     <h2 class="text-center">L'ingrédient n'existe pas encore en base, veuillez le créer avant de créer votre recette !</h2>
+  @endif
 
 </form>
 </div>

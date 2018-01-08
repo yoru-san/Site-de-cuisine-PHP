@@ -22,7 +22,7 @@ Route::get('/addRecipe', 'RecipeController@showPage');
 Route::post('/addRecipe', 'RecipeController@addRecipe');
 
 
-Route::get('/{id}/showRecipe', 'RecipeController@showRecipe');
+Route::get('/{id}/show', 'RecipeController@showRecipe');
 Route::get('/{id}/update', 'RecipeController@updateRecipe');
 Route::get('/{id}/delete', 'RecipeController@deleteRecipe');
 
