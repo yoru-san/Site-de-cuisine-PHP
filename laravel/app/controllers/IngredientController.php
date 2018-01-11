@@ -12,12 +12,30 @@ class IngredientController extends BaseController {
         $existIng = Ingredient::where('name', '=', Input::get('name'))->first();
         if ($existIng === null) {
             $ing = new Ingredient();
-            $ing->name = Input::get('name');
+            $ing->name = strtolower (Input::get('name'));
             $ing->unite = Input::get('unite');
             $ing->save();
             return Redirect::to('/');
         } 
         return View::make('site.addIngredient')->with('existing', $existIng);
+    }
+
+    public function listAllIngredients() {
+        //tableau de tout les noms d'ingrédients pour la fonctionnalité d'autocompletion
+        $ingredients = Ingredient::all();
+        $arrayIngredient  = array();
+        foreach ($ingredients as $ing) {
+        array_push($arrayIngredient, $ing->name);
+        }
+        $ingredientTab = "";
+        foreach ($arrayIngredient as $ingred) {
+            $aConcatener =  $ingred . ',';
+            $ingredientTab .= $aConcatener;
+            }
+
+        return View::make('site.addRecipe')->with('ingredientTab', $ingredientTab);
+
+
     }
         
 

@@ -36,7 +36,7 @@
 
   <div class="form-group">
     <label>Liste des ingredients</label><br>
-    <input type="text" class="form-control" value="" id="ingredientList"><br>
+    <input type="text" class="form-control" value="" id="ingredientList" autocomplete="off"><br>
     <small id="emailHelp" class="form-text text-muted">Barre espace pour ajouter les ingrédients à votre recette</small>
   </div>
 
@@ -62,7 +62,7 @@
     $('#ingredientList').on('itemRemoved', function(event) {
       addIngredient();
     });
-  });
+});
 
   function addIngredient() {
     var ingredients = $("#ingredientList").tagsinput('items');
@@ -73,6 +73,5 @@
     }
   }
 </script>
-
 
 @endsection

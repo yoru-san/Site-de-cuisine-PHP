@@ -2,6 +2,16 @@
 
 class RecipeController extends BaseController {
     
+
+    public function listRecipes() {
+        $recipes = Recipe::all();
+	$categories =  array();
+	foreach ($recipes as $rec) {
+		$category = Category::where('id', $rec->id_category)->first();
+		array_push($categories, $category);
+	}
+	return View::make('site.index')->with(array('recipes'=> $recipes, 'category' => $categories));
+    }
     
     public function showRecipe($id) {
         //$recipe = Recipe::find($id);
@@ -28,6 +38,8 @@ class RecipeController extends BaseController {
     }   
     
     public function addRecipe() {
+      
+        
         $ingredients = (Input::get('ingredients'));
         
         $realIngredients = array();
