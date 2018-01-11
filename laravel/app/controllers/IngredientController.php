@@ -27,13 +27,15 @@ class IngredientController extends BaseController {
         foreach ($ingredients as $ing) {
         array_push($arrayIngredient, $ing->name);
         }
-        $ingredientTab = "";
-        foreach ($arrayIngredient as $ingred) {
-            $aConcatener =  $ingred . ',';
-            $ingredientTab .= $aConcatener;
-            }
+        // $ingredientTab = "";
+        // foreach ($arrayIngredient as $ingred) {
+        //     $aConcatener =  $ingred . ',';
+        //     $ingredientTab .= $aConcatener;
+        //     }
 
-        return View::make('site.addRecipe')->with('ingredientTab', $ingredientTab);
+            //print_r($ingredientTab);
+
+        return Response::json($ingredients);
 
 
     }

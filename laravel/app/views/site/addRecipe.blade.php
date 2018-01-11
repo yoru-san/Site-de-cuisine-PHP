@@ -51,8 +51,24 @@
 
 <script>
   $(document).ready(function() {
+    var ingredients = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: '{{url( "/ingredients.json")}}'
+    });
+    ingredients.initialize();
+
+    console.log("Ingredients fetch");
+
     $('#ingredientList').tagsinput({
-      confirmKeys: [32]
+      confirmKeys: [32],
+      itemValue: 'name',
+      itemText: 'name',
+      typeaheadjs: {
+        name: 'ingredients',
+        displayKey: 'name',
+        source: ingredients.ttAdapter()
+      }
     });
 
     $('#ingredientList').on('itemAdded', function(event) {

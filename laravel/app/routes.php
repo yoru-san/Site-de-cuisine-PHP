@@ -16,7 +16,7 @@ Route::get('/addIngredient', 'IngredientController@showIngredientForm');
 Route::post('/addIngredient', 'IngredientController@addIngredient');
 
 
-Route::get('/ingredients', 'IngredientController@listAllIngredients');
+Route::get('/ingredients.json', 'IngredientController@listAllIngredients');
 Route::post('/ingredients', 'IngredientController@listAllIngredients');
 
 

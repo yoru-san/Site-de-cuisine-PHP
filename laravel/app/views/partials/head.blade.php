@@ -15,6 +15,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/typeahead.css')}}" crossorigin="anonymous">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
