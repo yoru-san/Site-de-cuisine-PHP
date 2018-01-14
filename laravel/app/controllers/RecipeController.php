@@ -92,8 +92,15 @@ class RecipeController extends BaseController {
 
     public function updateRecipeForm($id) {
         $recipe = Recipe::find($id);
+
+        $ingredients = DB::table('ingredients')
+        ->join('recipe_ingredients', 'ingredients.id', '=', 'recipe_ingredients.id_ingredient')
+        ->select('ingredients.name', 'ingredients.id')
+        ->where('id_recipe', '=', $recipe->id)
+        ->get();
+
         // On retourne sur la vue pour indiquer les anciennes informations sur la recette
-        return View::make('site.updateRecipe')->with('recipe', $recipe);
+        return View::make('site.updateRecipe')->with(array('recipe' => $recipe, 'ingredients' => $ingredients));
     }
     
     // Mise à jour d'une recette selon son id

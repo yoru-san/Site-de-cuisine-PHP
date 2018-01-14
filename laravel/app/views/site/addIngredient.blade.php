@@ -17,10 +17,10 @@
     <div class="form-group">
       <label>Unité de mesure</label>
       <select class="form-control" name="unite">
-          <option value="pc">Pièce</option>
-          <option value="gr">grammes</option>
-          <option value="cas">Cuillère à soupe</option>
-          <option value="cac">Cuillère à café</option>
+          <option value="Pièce">Pièce</option>
+          <option value="Grammes">Grammes</option>
+          <option value="Cuillère à soupe">Cuillère à soupe</option>
+          <option value="Cuillère à café">Cuillère à café</option>
           
       </select>
     </div>

@@ -77,6 +77,11 @@
       $('#ingredientList').on('itemRemoved', function(event) {
         addIngredient();
       });
+
+      // Récupération des ingrédients pour compléter l'input de l'update
+      @foreach ($ingredients as $ingredient)
+      $('#ingredientList').tagsinput('add', { id: {{$ingredient->id}}, name: '{{$ingredient->name}}' });
+      @endforeach
   });
   
     function addIngredient() {

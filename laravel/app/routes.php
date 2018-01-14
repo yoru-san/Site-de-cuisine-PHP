@@ -21,6 +21,10 @@ Route::post('/addIngredient', 'IngredientController@addIngredient');
 Route::get('/ingredients.json', 'IngredientController@listAllIngredients');
 Route::post('/ingredients', 'IngredientController@listAllIngredients');
 
+// Gestion de la recherche multi-table
+
+Route::get('/search', 'SearchController@searchInBase');
+
 
 
 
