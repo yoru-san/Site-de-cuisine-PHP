@@ -14,7 +14,7 @@
     </div>
     <div class="form-group">
      <label>Description de la recette</label>
-     <textarea class="form-control"  rows="3" name="description" placeholder="Description" >{{$recipe->description}}</textarea>
+     <textarea class="form-control"  rows="3" name="description" placeholder="Description, n'oubliez pas les quantités de votre recette" >{{$recipe->description}}</textarea>
    </div>
 
   <div class="form-group">
@@ -37,7 +37,9 @@
   <div class="form-group">
     <label>Liste des ingredients</label><br>
     <input type="text" class="form-control" value="" id="ingredientList" autocomplete="off"><br>
-    <small id="emailHelp" class="form-text text-muted">Barre espace pour ajouter les ingrédients à votre recette</small>
+    <small id="emailHelp" class="form-text text-muted">Veuillez utiliser l'autocompletion pour ajouter vos ingrédients</small>
+    <small id="emailHelp" class="form-text text-muted">Si l'ingrédient n'apparait pas, ajoutez le</small>
+
   </div>
   
   <input type="submit" value="Sauvegarder">
