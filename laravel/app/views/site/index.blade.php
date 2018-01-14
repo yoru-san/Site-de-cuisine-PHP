@@ -14,7 +14,7 @@
                 <tbody>   
                 @for ($i = 0; $i < count($recipes); $i++)
                     <tr role="row" class="even">
-                    <td><a>{{$recipes[$i]->title}}</a></td>
+                    <td>{{$recipes[$i]->title}}</td>
                     <td>{{$category[$i]->name}}</td>
                     <td><a class="btn btn-primary" href="{{url( $recipes[$i]->id . '/show')}}">Voir</a></td>                                  
                     <td><a class="btn btn-warning" href="{{url('/' . $recipes[$i]->id . '/update')}}">Modifier</a></td>

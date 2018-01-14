@@ -1,23 +1,29 @@
 <?php 
+// Fichier de controller des recettes
+class RecipeController extends BaseController { 
 
-class RecipeController extends BaseController {
+    // Affichage de la page d'ajout d'une recette
+    public function showPage() {
+        return View::make('site.addRecipe');
+    }   
     
-
+    // Liste de toutes les recettes pour l'affichage dans l'index
     public function listRecipes() {
         $recipes = Recipe::all();
-	$categories =  array();
-	foreach ($recipes as $rec) {
-		$category = Category::where('id', $rec->id_category)->first();
-		array_push($categories, $category);
-	}
-	return View::make('site.index')->with(array('recipes'=> $recipes, 'category' => $categories));
+        $categories =  array();
+        foreach ($recipes as $rec) {
+            $category = Category::where('id', $rec->id_category)->first();
+            array_push($categories, $category);
+        }
+        return View::make('site.index')->with(array('recipes'=> $recipes, 'category' => $categories));
     }
     
+    // Affichage unique d'une recette selon l'id
     public function showRecipe($id) {
         //$recipe = Recipe::find($id);
         $recipe = Recipe::where('id',$id) -> first();
-        $category = Category::where('id', $recipe->id_category)-> first();  
-        //print_r($category);
+        $category = Category::where('id', $recipe->id_category)-> first(); 
+        
         $ingredients = DB::table('ingredients')
         ->join('recipe_ingredients', 'ingredients.id', '=', 'recipe_ingredients.id_ingredient')
         ->select('ingredients.name')
@@ -28,18 +34,14 @@ class RecipeController extends BaseController {
         foreach ($ingredients as $ing) {
             $aConcatener =  $ing->name . ',';
             $tabIngredient .= $aConcatener;
-            }
-      
+        }
+        
         return View::make('site.showRecipe')->with(array('recipe'=> $recipe,'category'=> $category, 'tabIngredient'=> $tabIngredient));
     }
     
-    public function showPage() {
-        return View::make('site.addRecipe');
-    }   
-    
+
+    // Ajout d'une recette dans la base
     public function addRecipe() {
-      
-        
         $ingredients = (Input::get('ingredients'));
         
         $realIngredients = array();
@@ -68,13 +70,12 @@ class RecipeController extends BaseController {
                 array('id_ingredient' => $ing->id, 'id_recipe' => $recipe->id)
             );
         }
-
-        return Redirect::to('/');	
-       
         
+        return Redirect::to('/');	   
         
     }
     
+    // Suppression d'une recette selon son id
     public function deleteRecipe($id) {
         $recipe = Recipe::find($id);
         $recipe->delete();
@@ -83,12 +84,11 @@ class RecipeController extends BaseController {
         
     }
     
-    
+    // Mise à jour d'une recette selon son id
     public function updateRecipe($id) {
-        return View::make('site.updateRecipe');
-        
-        //return Redirect::to('site/updateRecipe');	
         $recipe = Recipe::find($id);
+        return View::make('site.updateRecipe')->with('recipe', $recipe);
+        
         $recipe->title = Input::get('title');
         $recipe->description = Input::get('description');
         $recipe->category = Input::get('id_category');
@@ -96,6 +96,6 @@ class RecipeController extends BaseController {
         $recipe->image = Input::get('url_image');
         
         $recipe->save();
-        //return Redirect::to('site/index');	
+        return Redirect::to('site/index');	
     }
 }
