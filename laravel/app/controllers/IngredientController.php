@@ -11,8 +11,10 @@ class IngredientController extends BaseController {
     public function addIngredient() { 
         $inputs = Input::all();
         $existIng = Ingredient::where('name', '=', Input::get('name'))->first();
+        // Si on ne trouve pas d'occurrence, on crée l'ingrédient
         if ($existIng === null) {
             $ing = new Ingredient();
+            // On met en minuscule le nom pour faciliter l'autocompletion
             $ing->name = strtolower (Input::get('name'));
             $ing->unite = Input::get('unite');
             $ing->save();

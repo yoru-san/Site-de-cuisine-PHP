@@ -7,7 +7,7 @@
       <h3 class="box-title">Ajouter une recette</h3>
     </div>
           
-  <form>
+  <form method="post">
     <div class="form-group">
       <label>Nom de la recette</label>
       <input type="text" class="form-control"  aria-describedby="emailHelp" name="title" value="{{$recipe->title}}">
@@ -32,13 +32,63 @@
     <input type="url" class="form-control" name="url_image" placeholder="URL" value="{{$recipe->image}}">
     <small id="emailHelp" class="form-text text-muted">Veuillez mettre un lien vers l'image</small>
   </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>Ingrédients de la recette</label>
-      <input type="password" class="form-control" name="ingredients" placeholder="Ingrédients">
-    </div>
-  </div>   
+  <div id="ingredientsInputs"></div>
+
+  <div class="form-group">
+    <label>Liste des ingredients</label><br>
+    <input type="text" class="form-control" value="" id="ingredientList" autocomplete="off"><br>
+    <small id="emailHelp" class="form-text text-muted">Barre espace pour ajouter les ingrédients à votre recette</small>
+  </div>
+  
+  <input type="submit" value="Sauvegarder">
+
 </form>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+      var ingredients = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: {
+          url: '{{url( "/ingredients.json")}}',
+          cache: false
+        }
+      });
+      ingredients.initialize();
+  
+  
+      $('#ingredientList').tagsinput({
+        confirmKeys: [32],
+        itemValue: 'name',
+        itemText: 'name',
+        typeaheadjs: {
+          name: 'ingredients',
+          displayKey: 'name',
+          source: ingredients.ttAdapter()
+        }
+      });
+  
+      $('#ingredientList').on('itemAdded', function(event) {
+        addIngredient();
+      });
+  
+      $('#ingredientList').on('itemRemoved', function(event) {
+        addIngredient();
+      });
+  });
+  
+    function addIngredient() {
+      var ingredients = $("#ingredientList").tagsinput('items');
+  
+      $("#ingredientsInputs").html("");
+      for(var i = 0; i < ingredients.length; i++) {
+        $("#ingredientsInputs").append("<input type=\"hidden\" name=\"ingredients[]\" value=\"" + ingredients[i].id + "\">");
+        }
+      
+  
+    }
+  </script>
 
 @endsection

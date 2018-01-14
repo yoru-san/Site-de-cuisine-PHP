@@ -54,11 +54,13 @@
     var ingredients = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: '{{url( "/ingredients.json")}}'
+      prefetch: {
+        url: '{{url( "/ingredients.json")}}',
+        cache: false
+      }
     });
     ingredients.initialize();
 
-    console.log("Ingredients fetch");
 
     $('#ingredientList').tagsinput({
       confirmKeys: [32],
@@ -85,8 +87,10 @@
 
     $("#ingredientsInputs").html("");
     for(var i = 0; i < ingredients.length; i++) {
-      $("#ingredientsInputs").append("<input type=\"hidden\" name=\"ingredients[]\" value=\"" + ingredients[i] + "\">");
-    }
+      $("#ingredientsInputs").append("<input type=\"hidden\" name=\"ingredients[]\" value=\"" + ingredients[i].id + "\">");
+      }
+    
+
   }
 </script>
 

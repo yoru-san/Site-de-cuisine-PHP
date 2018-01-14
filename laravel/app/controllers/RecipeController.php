@@ -1,7 +1,7 @@
 <?php 
 // Fichier de controller des recettes
 class RecipeController extends BaseController { 
-
+    
     // Affichage de la page d'ajout d'une recette
     public function showPage() {
         return View::make('site.addRecipe');
@@ -24,12 +24,14 @@ class RecipeController extends BaseController {
         $recipe = Recipe::where('id',$id) -> first();
         $category = Category::where('id', $recipe->id_category)-> first(); 
         
+        // Jointure pour récuperer les ingrédients correspondants à la recette 
         $ingredients = DB::table('ingredients')
         ->join('recipe_ingredients', 'ingredients.id', '=', 'recipe_ingredients.id_ingredient')
         ->select('ingredients.name')
         ->where('id_recipe', '=', $recipe->id)
         ->get();
         
+        // On concatene en string les nom des ingrédient séparé d'une virgule pour pouvoir l'utiliser en tags  
         $tabIngredient="";
         foreach ($ingredients as $ing) {
             $aConcatener =  $ing->name . ',';
@@ -39,24 +41,27 @@ class RecipeController extends BaseController {
         return View::make('site.showRecipe')->with(array('recipe'=> $recipe,'category'=> $category, 'tabIngredient'=> $tabIngredient));
     }
     
-
+    
     // Ajout d'une recette dans la base
     public function addRecipe() {
-        $ingredients = (Input::get('ingredients'));
-        
+        $ingredients = (Input::get('ingredients'));    
         $realIngredients = array();
         
-        foreach ($ingredients as $ing) {
-            $existIng = Ingredient::where('name', '=', $ing)->first();
+        // On vérifie que les ingrédients indiqués existent bien en base
+        foreach ($ingredients as $idIng) {
+            $existIng = Ingredient::where('id', '=', $idIng)->first();
+
             if ($existIng === null) {
-                print($ing);
-                print_r('il exsiste pas ton truc');
+                
+                print_r('il existe pas ton truc');
+                // L'ingrédient est inexistant, on retourne sur la vue pour indiquer l'erreur
                 return View::make('site.addRecipe')->with('existing', $existIng);
             }
-            // print_r(array('id_ingredient' => $existIng->id, 'id_recipe' => null));
             
+            // Tout les ingrédients vérifiés contenu dans ce tableau
             array_push($realIngredients, $existIng);
         }
+        // Création de la recette
         $recipe = new Recipe();
         $recipe->title = Input::get('title');
         $recipe->description = Input::get('description');
@@ -65,13 +70,14 @@ class RecipeController extends BaseController {
         
         $recipe->save(); 
         
+        // On remplit correctement la table pivot recipe_ingredient pour pouvoir récuperer les ingrédients plus tard
         foreach($realIngredients as $ing) {
             DB::table('recipe_ingredients')->insert(
                 array('id_ingredient' => $ing->id, 'id_recipe' => $recipe->id)
             );
         }
         
-        return Redirect::to('/');	   
+        return Redirect::to('/');   
         
     }
     
@@ -83,19 +89,53 @@ class RecipeController extends BaseController {
         return Redirect::to('/');	
         
     }
+
+    public function updateRecipeForm($id) {
+        $recipe = Recipe::find($id);
+        // On retourne sur la vue pour indiquer les anciennes informations sur la recette
+        return View::make('site.updateRecipe')->with('recipe', $recipe);
+    }
     
     // Mise à jour d'une recette selon son id
     public function updateRecipe($id) {
         $recipe = Recipe::find($id);
-        return View::make('site.updateRecipe')->with('recipe', $recipe);
+        //nOn rrécupère tout les ingrédients de la recette pour les supprimer en vu du prochain rajout
+        $ingredients = DB::table('recipe_ingredients')
+        ->where('id_recipe', '=', $recipe->id)
+        ->delete();
+
+        // On recupere les nouveaux ingrédients
+        $ingredients = (Input::get('ingredients'));    
+        $realIngredients = array();
         
+        // On vérifie que les ingrédients indiqués existent bien en base
+        foreach ($ingredients as $idIng) {
+            $existIng = Ingredient::where('id', '=', $idIng)->first();
+
+            if ($existIng === null) {
+                
+                print_r('il existe pas ton truc');
+                // L'ingrédient est inexistant, on retourne sur la vue pour indiquer l'erreur
+                return View::make('site.addRecipe')->with('existing', $existIng);
+            }
+            
+            // Tout les ingrédients vérifiés contenu dans ce tableau
+            array_push($realIngredients, $existIng);
+        }
+
+        // On récupere les autres informations
         $recipe->title = Input::get('title');
         $recipe->description = Input::get('description');
-        $recipe->category = Input::get('id_category');
-        $recipe->id_description = Input::get('description');
+        $recipe->id_category = Input::get('recipe_category');
         $recipe->image = Input::get('url_image');
         
         $recipe->save();
-        return Redirect::to('site/index');	
+
+        foreach($realIngredients as $ing) {
+            DB::table('recipe_ingredients')->insert(
+                array('id_ingredient' => $ing->id, 'id_recipe' => $recipe->id)
+            );
+        }
+        return Redirect::to('/');
     }
 }
