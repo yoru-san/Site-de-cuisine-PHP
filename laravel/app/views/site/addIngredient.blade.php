@@ -11,7 +11,7 @@
     <form method="post" action="#">
       <div class="form-group">
         <label>Nom de l'ingrédient</label>
-        <input type="text" class="form-control"  aria-describedby="emailHelp" name="name" placeholder="Nom">
+        <input type="text" class="form-control" name="name" placeholder="Nom">
       </div>
  
     <div class="form-group">

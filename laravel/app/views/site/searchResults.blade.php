@@ -3,6 +3,7 @@
 
 <h2>Résultats de la recherche :</h2>
 <h3>Recettes :</h3>
+
 <div class="row">
 @foreach ($recipes as $recipe)
         <div class="col-md-4">
@@ -28,6 +29,5 @@
         </a>
         @endforeach
       </div>
-
-
+      
 @endsection

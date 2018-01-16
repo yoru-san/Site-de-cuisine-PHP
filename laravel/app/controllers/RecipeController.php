@@ -47,7 +47,6 @@ class RecipeController extends BaseController {
         $ingredients = (Input::get('ingredients'));
         if ($ingredients === null) {
             $ingredients = 1;
-            print_r('inexistant');
             return View::make('site.addRecipe')->with('ingredients', $ingredients);
         } 
         $realIngredients = array();
@@ -149,5 +148,5 @@ class RecipeController extends BaseController {
             );
         }
         return Redirect::to('/');
-     }
+    }
 }

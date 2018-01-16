@@ -9,7 +9,7 @@
   <form method="post" action="#">
     <div class="form-group">
       <label>Nom de la recette</label>
-      <input type="text" class="form-control"  aria-describedby="emailHelp" name="title" placeholder="Nom">
+      <input type="text" class="form-control" name="title" placeholder="Nom">
     </div>
     <div class="form-group">
      <label>Description de la recette</label>
@@ -29,7 +29,7 @@
   <div class="form-group">
     <label>Image de la recette</label>
     <input type="url" class="form-control" name="url_image" placeholder="URL">
-    <small id="emailHelp" class="form-text text-muted">Veuillez mettre un lien vers l'image</small>
+    <small class="form-text text-muted">Veuillez mettre un lien vers l'image</small>
   </div>
 
   <div id="ingredientsInputs"></div>
@@ -37,8 +37,8 @@
   <div class="form-group">
     <label>Liste des ingredients</label><br>
     <input type="text" class="form-control" value="" id="ingredientList" autocomplete="off"><br>
-    <small id="emailHelp" class="form-text text-muted">Veuillez utiliser l'autocompletion pour ajouter vos ingrédients</small>
-    <small id="emailHelp" class="form-text text-muted">Si l'ingrédient n'apparait pas, ajoutez le</small>
+    <small class="form-text text-muted">Veuillez utiliser l'autocompletion pour ajouter vos ingrédients</small>
+    <small class="form-text text-muted">Si l'ingrédient n'apparait pas, ajoutez le</small>
     
   </div>
 

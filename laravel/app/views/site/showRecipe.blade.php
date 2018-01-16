@@ -1,10 +1,11 @@
 @extends('site.layout')
 @section('main')
+
 <div class="row">
     <div class="col-md-offset-2 col-md-6">
         <div class="row">
         <div class="col-md-8">
-                <h2 class="text-center">{{$recipe->title}}</h2>
+            <h2 class="text-center">{{$recipe->title}}</h2>
         </div>
         <div class="col-md-4">
                 <span class="label label-{{$category->css_class}}" style="float:right; margin-top:35px;">{{$category->name}}</span>
