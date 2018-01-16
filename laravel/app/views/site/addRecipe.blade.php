@@ -44,6 +44,9 @@
 
   <input type="submit" value="Ajouter">
 
+  @if(isset($ingredients))
+    <h2 class="text-center">Veuillez indiquer des ingrédient à votre recette</h2>
+  @endif
   @if (isset($existing))
      <h2 class="text-center">L'ingrédient n'existe pas encore en base, veuillez le créer avant de créer votre recette !</h2>
   @endif

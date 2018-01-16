@@ -27,7 +27,6 @@
 
     <input type="submit" value="Ajouter">
 
-
 @if(isset($existing))
   <h2 class="text-center">L'ingrédient existe déjà en base, pas besoin de le recréer.</h2>
 @endif

@@ -44,6 +44,11 @@
   
   <input type="submit" value="Sauvegarder">
 
+  
+ @if(count($ingredients) == 0)
+    <h2 class="text-center">Veuillez indiquer des ingrédient à votre recette</h2>
+  @endif
+
 </form>
 </div>
 
